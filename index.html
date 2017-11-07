@@ -1,4 +1,4 @@
-<!doctype html>
+<!DOCTYPE html>
 <html>
   <head>
     <title>Intérprete</title>
@@ -8,6 +8,8 @@
     <!-- Codemirror -->
     <script src="codemirror/lib/codemirror.js"></script>
     <link rel="stylesheet" href="codemirror/lib/codemirror.css">
+    <script src="codemirror/mode/xml/xml.js"></script>
+    <script src="codemirror/addon/edit/closetag.js"></script>
     <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/css/bootstrap.min.css" integrity="sha384-PsH8R72JQ3SOdhVi3uxftmaW6Vc51MKb0q5P2rRUpPvrszuE4W1povHYgTpBfshb" crossorigin="anonymous">
   </head>
@@ -15,27 +17,55 @@
     <div class="container">
       <div class="row">
         <div class="col">
-          <textarea class="form-control" id="xml_TA"></textarea>
-        </div>
-        <div class="col">
-          <textarea class="form-control" id="xslt_TA"></textarea>
+          <div class="dropdown">
+            <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+              Convertir a...
+            </button>
+            <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+              <a class="dropdown-item" href="#">Javascript</a>
+              <a class="dropdown-item" href="#">Python</a>
+            </div>
+          </div>
         </div>
       </div>
       <div class="row">
         <div class="col">
-          <textarea class="form-control" id="output_iframe_TA"></textarea>
+          <h3>Código XML:</h3>
+          <textarea class="form-control" id="xml_TA"><?xml version="1.0" encoding="UTF-8"?></textarea>
         </div>
         <div class="col">
-          <textarea class="form-control" id="console_py"></textarea>
+          <h3>Código XSLT:</h3>
+          <textarea class="form-control" id="xslt_TA"><?xml version="1.0" encoding="UTF-8"?>
+<xsl:stylesheet version="1.0" xmlns:xsl="http://www.w3.org/1999/XSL/Transform">
+<xsl:template match="/">
+
+</xsl:template>
+</xsl:stylesheet>
+          </textarea>
+        </div>
+      </div>
+      <button type="button" class="btn btn-primary btn-lg btn-block">¡Conviértete!</button>
+      <div class="row">
+        <div class="col">
+          <textarea class="form-control" id="output_iframe_TA"></textarea>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col">
+          <div class="embed-responsive embed-responsive-16by9">
+            <iframe class="embed-responsive-item" src="http://www.pythonanywhere.com/embedded/"></iframe>
+          </div>
         </div>
       </div>
     </div>
     <script>
     var editor_xml = CodeMirror.fromTextArea(document.getElementById('xml_TA'), {
-      lineNumbers: true
+      lineNumbers: true,
+      autoCloseTags: true
     });
     var editor_xslt = CodeMirror.fromTextArea(document.getElementById('xslt_TA'), {
-      lineNumbers: true
+      lineNumbers: true,
+      autoCloseTags: true
     });
     </script>
 
